@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnPlayers : MonoBehaviour {
 
     public GameObject PlayerInstance;
+    public float FlagSpacing = 0.9f;
 
 
     private void Awake() {
@@ -12,6 +13,17 @@ public class SpawnPlayers : MonoBehaviour {
             GameObject newPlayerInstance = Instantiate(PlayerInstance);
             newPlayerInstance.GetComponent<PlayerInstance>().PlayerID = i;
             newPlayerInstance.name = "Player " + i;
+
+            float flagPosX = newPlayerInstance.transform.localPosition.z + (i * FlagSpacing);
+
+            newPlayerInstance.transform.localPosition = new Vector3(
+                flagPosX,
+                newPlayerInstance.transform.localPosition.y,
+                newPlayerInstance.transform.localPosition.z
+            );
+
+            GameObject playerFlagGO = newPlayerInstance.GetComponent<PlayerInstance>().PlayerFlag.transform.GetChild(0).gameObject;
+            playerFlagGO.GetComponent<Renderer>().material.color = ColorManager.PlayerColors[i];
         }
     }
 

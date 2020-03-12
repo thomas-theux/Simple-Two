@@ -8,6 +8,9 @@ public class GameSettings : MonoBehaviour {
     public static int ConnectedGamepads = 0;
     public static int PlayerMax = 6;
 
+    // 0 = selection; 1 = countdown; 2 = race; 3 = results
+    public static int NavigationMode = -1;
+
     // 0 = slow; 1 = medium; 2 = fast
     public static int RacerSpeed = 1;
 

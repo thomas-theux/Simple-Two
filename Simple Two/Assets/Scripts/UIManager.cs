@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour {
 
     private void ProcessInput() {
         if (confirmBTN) {
+            GameSettings.NavigationMode = 0;
             SceneManager.LoadScene("2 Meadows");
         }
 

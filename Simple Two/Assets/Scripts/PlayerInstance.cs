@@ -7,7 +7,14 @@ public class PlayerInstance : MonoBehaviour {
 
     public int PlayerID = 0;
     public int PlayerScore = 0;
-    public int SelectedRacer = -1;
+    public int SelectedRacerIndex = 0;
+
+    public GameObject PlayerFlag;
+
+    private int navigationIndex = 0;
+
+    private float startPosZ = 0;
+    private float moveFlagZAxis = 2.0f;
 
     private Player player;
 
@@ -26,14 +33,26 @@ public class PlayerInstance : MonoBehaviour {
     private float leftStickVertical = 0;
 
 
-    private void Awake() {
+    private void Start() {
         player = ReInput.players.GetPlayer(PlayerID);
+
+        startPosZ = PlayerFlag.transform.position.z;
     }
 
 
     private void Update() {
         GetInput();
-        ProcessInput();
+        // ProcessInput();
+
+        if (GameSettings.NavigationMode == 0) {
+            if (navigationIndex == 0) {
+                RacerSelection();
+            }
+
+            if (navigationIndex == 1) {
+                CancelSelection();
+            }
+        }
     }
 
 
@@ -59,13 +78,62 @@ public class PlayerInstance : MonoBehaviour {
         
         if (dpadLeft) print("left");
         if (dpadRight) print("right");
-        if (dpadUp) print("up");
-        if (dpadDown) print("down");
 
         if (leftStickHorizontal < -0.5f) print("stick left");
         if (leftStickHorizontal > 0.5f) print("stick right");
         if (leftStickVertical < -0.5f) print("stick down");
         if (leftStickVertical > 0.5f) print("stick up");
+    }
+
+
+    private void RacerSelection() {
+        if (dpadUp) {
+            if (SelectedRacerIndex < GameSettings.PlayerMax - 1) SelectedRacerIndex++;
+            // else SelectedRacerIndex = 0;
+            DisplayPlayerFlag();
+        }
+        
+        if (dpadDown) {
+            if (SelectedRacerIndex > 0) SelectedRacerIndex--;
+            // else SelectedRacerIndex = GameSettings.PlayerMax - 1;
+            DisplayPlayerFlag();
+        }
+
+        // Select racer
+        if (confirmBTN) {
+            if (SelectionManager.SelectedRacers.IndexOf(SelectedRacerIndex) < 0) {
+                navigationIndex = 1;
+                SelectionManager.SelectedRacers[PlayerID] = SelectedRacerIndex;
+
+                SelectionManager.DoneSelecting++;
+                StartCoroutine(SelectionManager.ContinueDelay());
+            } else {
+                // Can't select this racer because someone else already selected it
+                // Play sound
+            }
+        }
+    }
+
+
+    private void DisplayPlayerFlag() {
+        float newFlagPosZ = startPosZ + (moveFlagZAxis * SelectedRacerIndex);
+
+        PlayerFlag.transform.localPosition = new Vector3(
+            PlayerFlag.transform.localPosition.x,
+            PlayerFlag.transform.localPosition.y,
+            newFlagPosZ
+        );
+    }
+
+
+    private void CancelSelection() {
+        // Cancel selection
+        if (cancelBTN) {
+            navigationIndex = 0;
+            SelectionManager.SelectedRacers[PlayerID] = -1;
+
+            SelectionManager.DoneSelecting--;
+        }
     }
 
 }

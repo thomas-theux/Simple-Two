@@ -213,7 +213,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1069926813}
-  - component: {fileID: 1069926812}
   - component: {fileID: 1069926811}
   m_Layer: 0
   m_Name: UI Manager
@@ -232,18 +231,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab1b9d0583f624daa824e3e86632296d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1069926812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069926810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c405b937100e148a5961e255f860f2a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1069926813
