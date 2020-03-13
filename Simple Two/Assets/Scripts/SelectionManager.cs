@@ -15,6 +15,8 @@ public class SelectionManager : MonoBehaviour {
     public static float countDownDef = 3.5f;
     public static float countDownTime = 3.0f;
 
+    private float timeLapse = 1.75f;
+
 
     private void Start() {
         for (int i = 0; i < GameSettings.PlayerCount; i++) {
@@ -27,15 +29,20 @@ public class SelectionManager : MonoBehaviour {
     public static IEnumerator ContinueDelay() {
         yield return new WaitForSeconds(1.5f);
 
-        if (DoneSelecting == GameSettings.PlayerCount) {
-            CheckIfPlayersAreDoneSelecting();
+        if (GameSettings.NavigationMode < 1) {
+            if (DoneSelecting == GameSettings.PlayerCount) {
+                StartingCountDown();
+            }
         }
     }
 
     
-    public static void CheckIfPlayersAreDoneSelecting() {
-        print("Done selecting!");
+    public static void StartingCountDown() {
         GameSettings.NavigationMode = 1;
+
+        for (int i = 0; i < GameSettings.PlayerMax; i++) {
+            SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().SwitchStats();
+        }
     }
 
 
@@ -54,15 +61,18 @@ public class SelectionManager : MonoBehaviour {
 
 
     private void CountingDown() {
-        countDownTime -= Time.deltaTime;
+        countDownTime -= Time.deltaTime * timeLapse;
 
         // int currentCountDownTime = 
         CountDownTimer.text = countDownTime.ToString("F0");
 
         if (countDownTime <= 0.5f) {
-            print("Race!");
             CountDownTimer.gameObject.SetActive(false);
             GameSettings.NavigationMode = 2;
+
+            for (int i = 0; i < GameSettings.PlayerMax; i++) {
+                SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().isRunning = true;
+            }
         }
     }
 
