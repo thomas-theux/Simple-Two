@@ -55,7 +55,13 @@ public class RacerInstance : MonoBehaviour {
 
 
     private void Start() {
+        StatsGO.transform.parent = null;
+
         SwitchStats();
+
+        // int wins = ResultsManager.RacerScores[RacerID];
+        // if (wins != 1) WinsText.text = wins + " wins";
+        // else WinsText.text = wins + " win";
     }
 
 
@@ -97,6 +103,10 @@ public class RacerInstance : MonoBehaviour {
 
 
     public void SwitchStats() {
+        int wins = ResultsManager.RacerScores[RacerID];
+        if (wins != 1) WinsText.text = wins + " wins";
+        else WinsText.text = wins + " win";
+
         bool switchActive = !StatsGO.activeSelf;
         StatsGO.SetActive(switchActive);
     }

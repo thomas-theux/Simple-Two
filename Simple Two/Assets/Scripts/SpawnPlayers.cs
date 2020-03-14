@@ -7,6 +7,8 @@ public class SpawnPlayers : MonoBehaviour {
     public GameObject PlayerInstance;
     public float FlagSpacing = 0.9f;
 
+    public static List<GameObject> AllPlayersArr = new List<GameObject>();
+
 
     private void Awake() {
         for (int i = 0; i < GameSettings.PlayerCount; i++) {
@@ -24,6 +26,8 @@ public class SpawnPlayers : MonoBehaviour {
 
             GameObject playerFlagGO = newPlayerInstance.GetComponent<PlayerInstance>().PlayerFlag.transform.GetChild(0).gameObject;
             playerFlagGO.GetComponent<Renderer>().material.color = ColorManager.PlayerColors[i];
+
+            AllPlayersArr.Add(newPlayerInstance);
         }
     }
 

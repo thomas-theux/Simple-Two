@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using Rewired;
 
 public class PlayerInstance : MonoBehaviour {
 
     public int PlayerID = 0;
-    public int PlayerScore = 0;
+    // public int PlayerScore = 0;
     public int SelectedRacerIndex = 0;
 
     public GameObject PlayerFlag;
+    public TMP_Text ScoreText;
 
     private int navigationIndex = 0;
 
@@ -38,6 +40,8 @@ public class PlayerInstance : MonoBehaviour {
         player = ReInput.players.GetPlayer(PlayerID);
 
         startPosZ = PlayerFlag.transform.position.z;
+
+        ScoreText.text = ResultsManager.PlayerScores[PlayerID] + "";
     }
 
 

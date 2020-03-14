@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour {
 
-    public static int PlayerCount = 1;
+    public static int PlayerCount = 6;
     public static int ConnectedGamepads = 0;
     public static int PlayerMax = 6;
 
