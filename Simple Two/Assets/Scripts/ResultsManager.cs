@@ -8,6 +8,7 @@ public class ResultsManager : MonoBehaviour {
     private List<float> sortedDistances = new List<float>();
 
     public int leaderIndex = -1;
+    public int lastIndex = -1;
 
 
     private void Awake() {
@@ -20,20 +21,28 @@ public class ResultsManager : MonoBehaviour {
 
     private void Update() {
         if (GameSettings.NavigationMode == 2) {
-            CalculateCurrentLeader();
+            CalculateFirstAndLast();
             DisplayCurrentLeader();
+            DisplayCurrentLast();
+        }
+
+        if (GameSettings.NavigationMode == 3) {
+            // Display results
         }
     }
 
 
-    private void CalculateCurrentLeader() {
+    // CALCULATE LEADER
+    private void CalculateFirstAndLast() {
         for (int i = 0; i < GameSettings.PlayerMax; i++) {
             racerDistances[i] = SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().CurrentDistanceToFinish;
             sortedDistances[i] = racerDistances[i];
         }
 
         sortedDistances.Sort();
+
         leaderIndex = racerDistances.IndexOf(sortedDistances[0]);
+        lastIndex = racerDistances.IndexOf(sortedDistances[sortedDistances.Count-1]);
     }
 
 
@@ -41,6 +50,15 @@ public class ResultsManager : MonoBehaviour {
         for (int i = 0; i < GameSettings.PlayerMax; i++) {
             if (i != leaderIndex) SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().isLeader = false;
             else SpawnRacers.AllRacersArr[leaderIndex].GetComponent<RacerInstance>().isLeader = true;
+        }
+
+    }
+
+
+    private void DisplayCurrentLast() {
+        for (int i = 0; i < GameSettings.PlayerMax; i++) {
+            if (i != lastIndex) SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().isLast = false;
+            else SpawnRacers.AllRacersArr[lastIndex].GetComponent<RacerInstance>().isLast = true;
         }
 
     }

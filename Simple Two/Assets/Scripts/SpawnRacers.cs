@@ -18,6 +18,7 @@ public class SpawnRacers : MonoBehaviour {
         for (int i = 0; i < GameSettings.PlayerMax; i++) {
             // Instantiate racer
             GameObject newRacerInstance = Instantiate(RacerInstance);
+            newRacerInstance.GetComponent<RacerInstance>().RacerID = i;
             newRacerInstance.name = "Racer " + i;
 
             newRacerInstance.GetComponent<SpriteRenderer>().sprite = GameSettings.RacerSprites[i];
@@ -36,6 +37,11 @@ public class SpawnRacers : MonoBehaviour {
 
             newRacerInstance.GetComponent<RacerInstance>().DistanceToFinish = newFinishDistance.transform;
         }
+    }
+
+
+    public static void CleanUpSpawnRacers() {
+        AllRacersArr.Clear();
     }
 
 }

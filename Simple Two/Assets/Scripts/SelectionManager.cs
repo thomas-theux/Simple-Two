@@ -13,7 +13,7 @@ public class SelectionManager : MonoBehaviour {
     private bool startCountDown = false;
 
     public static float countDownDef = 3.5f;
-    public static float countDownTime = 3.0f;
+    public static float countDownTime = 3.5f;
 
     private float timeLapse = 1.75f;
 
@@ -74,6 +74,12 @@ public class SelectionManager : MonoBehaviour {
                 SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().isRunning = true;
             }
         }
+    }
+
+
+    public static void CleanUpSelectionManager() {
+        SelectedRacers.Clear();
+        DoneSelecting = 0;
     }
 
 }

@@ -5,27 +5,18 @@ using TMPro;
 
 public class RacerInstance : MonoBehaviour {
 
+    public int RacerID = 0;
+
     public Transform DistanceToFinish;
     public GameObject LeaderGO;
 
     public GameObject StatsGO;
     public TMP_Text WinsText;
 
-    public int racerID = 0;
-
     public float CurrentDistanceToFinish;
 
     private float speedLength = 1.0f;
     private float speedMultiplier = 1.0f;
-    private float extraMultiplier = 1.0f;
-
-    private float minLength = 0.3f;
-    private float maxLength = 1.0f;
-
-    // private float minSpeed = 0.2f;
-    // private float maxSpeed = 2.0f;
-
-    // private float defaultSpeed = 1.0f;
 
     private bool startRandomizing = false;
     public bool isRunning = false;
@@ -33,7 +24,34 @@ public class RacerInstance : MonoBehaviour {
     private bool initiateLastMeters = false;
 
     public bool isLeader = false;
+    public bool isLast = false;
     private bool showLeaderGameObject = false;
+
+    private float[] walkingSpeeds = new float[] {0.25f, 1.0f, 3.0f, 10.0f};
+    private int rndSpeedIndex = 0;
+
+    private float speedShortest = 0.1f;
+    private float speedShort = 0.2f;
+    private float speedMedium = 0.5f;
+    private float speedLong = 1.0f;
+    private float speedLongest = 3.0f;
+
+    // Walking modes
+    // 25 percent chance
+    private int stumbleMin = 0;
+    private int stumbleMax = 24;
+
+    // 40 percent chance
+    private int normalMin = 25;
+    private int normalMax = 64;
+    
+    // 30 percent chance
+    private int dashMin = 65;
+    private int dashMax = 94;
+    
+    // 5 percent chance
+    private int hailMaryMin = 95;
+    private int hailMaryMax = 99;
 
 
     private void Start() {
@@ -87,22 +105,54 @@ public class RacerInstance : MonoBehaviour {
     // RANDOMIZE RACER SPEED
 
     private void RandomSpeed() {
-        int rndChance = Random.Range(0, 101);
-        if (rndChance <= 50) extraMultiplier = 1.0f;
-        else if (rndChance > 50 && rndChance <= 90) extraMultiplier = 2.0f;
-        else if (rndChance > 90 && rndChance <= 99) extraMultiplier = 3.0f;
-        else if (rndChance > 99 && rndChance <= 100) extraMultiplier = 6.0f;
+        rndSpeedIndex = 0;
+        int rndMode = 0;
 
-        speedMultiplier = extraMultiplier;
+        if (isLast) rndMode = Random.Range(normalMin, hailMaryMax + 1);
+        else rndMode = Random.Range(stumbleMin, dashMax + 1);
+
+        if (rndMode >= stumbleMin && rndMode <= stumbleMax) rndSpeedIndex = 0;
+        else if (rndMode >= normalMin && rndMode <= normalMax) rndSpeedIndex = 1;
+        else if (rndMode >= dashMin && rndMode <= dashMax) rndSpeedIndex = 2;
+        else if (rndMode >= hailMaryMin && rndMode <= hailMaryMax) rndSpeedIndex = 3;
+
+        speedMultiplier = walkingSpeeds[rndSpeedIndex];
 
         StartCoroutine(ChangeSpeed());
     }
 
 
     private void RandomLength() {
-        speedLength = Random.Range(minLength, maxLength);
+        speedLength = 0.0f;
+        switch(rndSpeedIndex) {
 
-        RandomSpeed();
+            // STUMBLE
+            case 0:
+                if (isLeader) speedLength = Random.Range(speedMedium, speedLong);
+                else speedLength = Random.Range(speedShort, speedMedium);
+                break;
+
+            // NORMAL
+            case 1:
+                speedLength = Random.Range(speedMedium, speedLong);
+                break;
+
+            // DASH
+            case 2:
+                speedLength = Random.Range(speedShort, speedMedium);
+                if (isLeader) speedLength = Random.Range(speedShortest, speedShort);
+                if (isLast) speedLength = Random.Range(speedMedium, speedLong);
+                break;
+
+            // HAIL MARY
+            case 3:
+                speedLength = Random.Range(speedLong, speedLongest);
+                break;
+        }
+
+        if (isRunning) {
+            RandomSpeed();
+        }
     }
 
 
@@ -117,6 +167,8 @@ public class RacerInstance : MonoBehaviour {
         initiateLastMeters = true;
         yield return new WaitForSeconds(1.5f);
         lastMeter = false;
+
+        GameSettings.NavigationMode = 3;
     }
 
 }

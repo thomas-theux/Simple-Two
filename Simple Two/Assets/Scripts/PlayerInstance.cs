@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Rewired;
 
 public class PlayerInstance : MonoBehaviour {
@@ -51,6 +52,17 @@ public class PlayerInstance : MonoBehaviour {
 
             if (navigationIndex == 1) {
                 CancelSelection();
+            }
+        }
+
+        if (GameSettings.NavigationMode == 3) {
+            if (confirmBTN) {
+                SelectionManager.CleanUpSelectionManager();
+                SpawnRacers.CleanUpSpawnRacers();
+
+                GameSettings.NavigationMode = 0;
+
+                SceneManager.LoadScene("2 Meadows");
             }
         }
     }
