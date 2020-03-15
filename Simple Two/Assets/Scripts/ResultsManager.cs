@@ -84,6 +84,7 @@ public class ResultsManager : MonoBehaviour {
     private void AddPointsToScore() {
         // Give winning player one point
         if (SelectionManager.SelectedRacers.IndexOf(leaderIndex) > -1) {
+            AudioManager.instance.Play("Give Point");
             int winnerIndex = SelectionManager.SelectedRacers.IndexOf(leaderIndex);
             ResultsManager.PlayerScores[winnerIndex]++;
         }

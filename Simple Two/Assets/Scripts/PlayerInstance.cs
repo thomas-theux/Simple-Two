@@ -68,7 +68,7 @@ public class PlayerInstance : MonoBehaviour {
         }
 
 
-        if (cancelBTN) {
+        if (optionBTN) {
             if (PlayerID == 0) QuitToMainMenu();
         }
     }
@@ -91,13 +91,21 @@ public class PlayerInstance : MonoBehaviour {
 
     private void RacerSelection() {
         if (dpadUp) {
-            if (SelectedRacerIndex < GameSettings.PlayerMax - 1) SelectedRacerIndex++;
+
+            if (SelectedRacerIndex < GameSettings.PlayerMax - 1) {
+                AudioManager.instance.PlayRandom("Navigate Vertical", 0.9f, 0.9f);
+                SelectedRacerIndex++;
+            }
             // else SelectedRacerIndex = 0;
             DisplayPlayerFlag();
         }
         
         if (dpadDown) {
-            if (SelectedRacerIndex > 0) SelectedRacerIndex--;
+
+            if (SelectedRacerIndex > 0) {
+                SelectedRacerIndex--;
+                AudioManager.instance.PlayRandom("Navigate Vertical", 0.8f, 0.8f);
+            }
             // else SelectedRacerIndex = GameSettings.PlayerMax - 1;
             DisplayPlayerFlag();
         }
@@ -105,6 +113,8 @@ public class PlayerInstance : MonoBehaviour {
         // Select racer
         if (confirmBTN) {
             if (SelectionManager.SelectedRacers.IndexOf(SelectedRacerIndex) < 0) {
+                AudioManager.instance.Play("Confirm");
+
                 navigationIndex = 1;
                 SelectionManager.SelectedRacers[PlayerID] = SelectedRacerIndex;
 
@@ -112,7 +122,7 @@ public class PlayerInstance : MonoBehaviour {
                 StartCoroutine(SelectionManager.ContinueDelay());
             } else {
                 // Can't select this racer because someone else already selected it
-                // Play sound
+                AudioManager.instance.Play("Cancel");
             }
         }
     }
@@ -137,6 +147,8 @@ public class PlayerInstance : MonoBehaviour {
     private void CancelSelection() {
         // Cancel selection
         if (cancelBTN) {
+            AudioManager.instance.Play("Cancel");
+
             navigationIndex = 0;
             SelectionManager.SelectedRacers[PlayerID] = -1;
 
@@ -146,6 +158,8 @@ public class PlayerInstance : MonoBehaviour {
 
 
     private void NextRace() {
+        AudioManager.instance.Play("Next Race");
+
         SelectionManager.CleanUpSelectionManager();
         SpawnRacers.CleanUpSpawnRacers();
         SpawnPlayers.CleanUpSpawnPlayers();

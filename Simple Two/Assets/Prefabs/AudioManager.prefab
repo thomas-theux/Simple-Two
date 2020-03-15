@@ -58,25 +58,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Navigate Horizontal
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 14bd87fe4c6c4453dbc13e0100dbf49f, type: 3}
     volume: 1
-    pitch: 1
+    pitch: 0.8
     loop: 0
     source: {fileID: 0}
   - name: Navigate Vertical
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 14bd87fe4c6c4453dbc13e0100dbf49f, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Confirm
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 39b9501efbad144628cbfd1aec8632b3, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Cancel
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: e5deccdbda06d4aabac26bad35f5a485, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -88,21 +88,21 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Start Race
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 29b1cdf01ed8c4c1f8d8195aea2c9b7e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Hail Mary
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: ddb5adfced44c4a2abfcc6f784f0a1c9, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Reach Finish
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 7d01c12a25e6f420980b339841695759, type: 3}
     volume: 1
-    pitch: 1
+    pitch: 2
     loop: 0
     source: {fileID: 0}
   - name: Winner Firework
@@ -118,13 +118,13 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Give Point
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 1a356ec267d9848d984325cd7b40d2c6, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Next Race
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: f36a565e0f4084cd291238ec0d2d27c4, type: 3}
     volume: 1
     pitch: 1
     loop: 0

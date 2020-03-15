@@ -11,6 +11,7 @@ public class SelectionManager : MonoBehaviour {
     public TMP_Text CountDownTimer;
 
     private bool startCountDown = false;
+    private bool isTicking = false;
 
     public static float countDownDef = 3.5f;
     public static float countDownTime = 3.5f;
@@ -53,6 +54,9 @@ public class SelectionManager : MonoBehaviour {
                 startCountDown = true;
                 countDownTime = countDownDef;
                 CountDownTimer.gameObject.SetActive(true);
+                isTicking = true;
+
+                StartCoroutine(CountDownTick());
             }
 
             CountingDown();
@@ -67,8 +71,11 @@ public class SelectionManager : MonoBehaviour {
         CountDownTimer.text = countDownTime.ToString("F0");
 
         if (countDownTime <= 0.5f) {
+            AudioManager.instance.Play("Start Race");
+
             CountDownTimer.gameObject.SetActive(false);
             GameSettings.NavigationMode = 2;
+            isTicking = false;
 
             for (int i = 0; i < GameSettings.PlayerMax; i++) {
                 SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().isRunning = true;
@@ -80,6 +87,16 @@ public class SelectionManager : MonoBehaviour {
     public static void CleanUpSelectionManager() {
         SelectedRacers.Clear();
         DoneSelecting = 0;
+    }
+
+
+    private IEnumerator CountDownTick() {
+        float modifiedTime = 1 / timeLapse;
+
+        while (isTicking) {
+            AudioManager.instance.Play("Count Down");
+            yield return new WaitForSeconds(modifiedTime);
+        }
     }
 
 }

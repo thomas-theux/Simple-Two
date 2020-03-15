@@ -125,7 +125,10 @@ public class RacerInstance : MonoBehaviour {
         if (rndMode >= stumbleMin && rndMode <= stumbleMax) rndSpeedIndex = 0;
         else if (rndMode >= normalMin && rndMode <= normalMax) rndSpeedIndex = 1;
         else if (rndMode >= dashMin && rndMode <= dashMax) rndSpeedIndex = 2;
-        else if (rndMode >= hailMaryMin && rndMode <= hailMaryMax) rndSpeedIndex = 3;
+        else if (rndMode >= hailMaryMin && rndMode <= hailMaryMax) {
+            rndSpeedIndex = 3;
+            AudioManager.instance.Play("Hail Mary");
+        }
 
         speedMultiplier = walkingSpeeds[rndSpeedIndex];
 
