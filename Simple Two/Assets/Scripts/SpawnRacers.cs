@@ -36,6 +36,10 @@ public class SpawnRacers : MonoBehaviour {
             newFinishDistance.transform.localPosition = new Vector3(finishPosX, newFinishDistance.transform.localPosition.y, finishPosZ);
 
             newRacerInstance.GetComponent<RacerInstance>().DistanceToFinish = newFinishDistance.transform;
+
+            // Put all racers and all FinishDistances in one parent GO
+            newRacerInstance.transform.parent = GameObject.Find("Racers").transform;
+            newFinishDistance.transform.parent = GameObject.Find("FinishDistances").transform;
         }
     }
 

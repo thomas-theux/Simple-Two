@@ -93,8 +93,19 @@ public class ResultsManager : MonoBehaviour {
 
         // Display racer stats
         for (int i = 0; i < GameSettings.PlayerMax; i++) {
-            SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().SwitchStats();
+            SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().SwitchStats(true);
         }
+
+        // Display player points
+        for (int i = 0; i < GameSettings.PlayerCount; i++) {
+            SpawnPlayers.AllPlayersArr[i].GetComponent<PlayerInstance>().DisplayPlayerScore();
+        }
+    }
+
+
+    public static void CleanUpResultsManager() {
+        RacerScores.Clear();
+        PlayerScores.Clear();
     }
 
 }

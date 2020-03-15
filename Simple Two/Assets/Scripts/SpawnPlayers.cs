@@ -24,11 +24,19 @@ public class SpawnPlayers : MonoBehaviour {
                 newPlayerInstance.transform.localPosition.z
             );
 
+            // Color the player flags
             GameObject playerFlagGO = newPlayerInstance.GetComponent<PlayerInstance>().PlayerFlag.transform.GetChild(0).gameObject;
             playerFlagGO.GetComponent<Renderer>().material.color = ColorManager.PlayerColors[i];
 
+            // Put all players in one parent GO
+            newPlayerInstance.transform.parent = GameObject.Find("Players").transform;
+
             AllPlayersArr.Add(newPlayerInstance);
         }
+    }
+
+    public static void CleanUpSpawnPlayers() {
+        AllPlayersArr.Clear();
     }
 
 }

@@ -41,7 +41,7 @@ public class PlayerInstance : MonoBehaviour {
 
         startPosZ = PlayerFlag.transform.position.z;
 
-        ScoreText.text = ResultsManager.PlayerScores[PlayerID] + "";
+        DisplayPlayerScore();
     }
 
 
@@ -61,13 +61,15 @@ public class PlayerInstance : MonoBehaviour {
 
         if (GameSettings.NavigationMode == 3) {
             if (confirmBTN) {
-                SelectionManager.CleanUpSelectionManager();
-                SpawnRacers.CleanUpSpawnRacers();
-
-                GameSettings.NavigationMode = 0;
-
-                SceneManager.LoadScene("2 Meadows");
+                if (PlayerID == 0) {
+                    NextRace();
+                }
             }
+        }
+
+
+        if (cancelBTN) {
+            if (PlayerID == 0) QuitToMainMenu();
         }
     }
 
@@ -84,21 +86,6 @@ public class PlayerInstance : MonoBehaviour {
         
         leftStickHorizontal = player.GetAxis("Left Stick Horizontal");
         leftStickVertical = player.GetAxis("Left Stick Vertical");
-    }
-
-
-    private void ProcessInput() {
-        if (confirmBTN) print("confirm");
-        if (cancelBTN) print("cancel");
-        if (optionBTN) print("option");
-        
-        if (dpadLeft) print("left");
-        if (dpadRight) print("right");
-
-        if (leftStickHorizontal < -0.5f) print("stick left");
-        if (leftStickHorizontal > 0.5f) print("stick right");
-        if (leftStickVertical < -0.5f) print("stick down");
-        if (leftStickVertical > 0.5f) print("stick up");
     }
 
 
@@ -142,6 +129,11 @@ public class PlayerInstance : MonoBehaviour {
     }
 
 
+    public void DisplayPlayerScore() {
+        ScoreText.text = ResultsManager.PlayerScores[PlayerID] + "";
+    }
+
+
     private void CancelSelection() {
         // Cancel selection
         if (cancelBTN) {
@@ -150,6 +142,28 @@ public class PlayerInstance : MonoBehaviour {
 
             SelectionManager.DoneSelecting--;
         }
+    }
+
+
+    private void NextRace() {
+        SelectionManager.CleanUpSelectionManager();
+        SpawnRacers.CleanUpSpawnRacers();
+        SpawnPlayers.CleanUpSpawnPlayers();
+
+        GameSettings.NavigationMode = 0;
+
+        SceneManager.LoadScene("2 Meadows");
+    }
+
+
+    private void QuitToMainMenu() {
+        SelectionManager.CleanUpSelectionManager();
+        SpawnRacers.CleanUpSpawnRacers();
+        SpawnPlayers.CleanUpSpawnPlayers();
+        ResultsManager.CleanUpResultsManager();
+        ResultsManager.initializedScores = false;
+
+        SceneManager.LoadScene("1 Main Menu");
     }
 
 }

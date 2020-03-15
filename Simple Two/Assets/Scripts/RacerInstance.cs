@@ -10,7 +10,8 @@ public class RacerInstance : MonoBehaviour {
     public Transform DistanceToFinish;
     public GameObject LeaderGO;
 
-    public GameObject StatsGO;
+    // public GameObject StatsGO;
+    public GameObject WinsGO;
     public TMP_Text WinsText;
 
     public float CurrentDistanceToFinish;
@@ -55,13 +56,14 @@ public class RacerInstance : MonoBehaviour {
 
 
     private void Start() {
-        StatsGO.transform.parent = null;
+        // StatsGO.transform.parent = null;
+        // StatsGO.name = "Stats " + RacerID;
+        // StatsGO.transform.parent = GameObject.Find("Stats").transform;
 
-        SwitchStats();
+        WinsGO.name = "Wins " + RacerID;
+        // WinsGO.transform.parent = GameObject.Find("Wins").transform;
 
-        // int wins = ResultsManager.RacerScores[RacerID];
-        // if (wins != 1) WinsText.text = wins + " wins";
-        // else WinsText.text = wins + " win";
+        SwitchStats(true);
     }
 
 
@@ -102,13 +104,12 @@ public class RacerInstance : MonoBehaviour {
     }
 
 
-    public void SwitchStats() {
+    public void SwitchStats(bool switchState) {
         int wins = ResultsManager.RacerScores[RacerID];
-        if (wins != 1) WinsText.text = wins + " wins";
-        else WinsText.text = wins + " win";
+        WinsText.text = wins + "";
 
-        bool switchActive = !StatsGO.activeSelf;
-        StatsGO.SetActive(switchActive);
+        // StatsGO.SetActive(switchState);
+        WinsGO.SetActive(switchState);
     }
 
 
