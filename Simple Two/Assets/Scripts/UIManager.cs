@@ -51,21 +51,28 @@ public class UIManager : MonoBehaviour {
     private void ProcessInput() {
         if (confirmBTN) {
             GameSettings.NavigationMode = 0;
+            GameSettings.PlayerCount = GameSettings.ConnectedGamepads;
             SceneManager.LoadScene("2 Meadows");
         }
 
-        if (cancelBTN) print("cancel");
-        if (optionBTN) print("option");
-        
-        if (dpadLeft) print("left");
-        if (dpadRight) print("right");
-        if (dpadUp) print("up");
-        if (dpadDown) print("down");
+        for (int i = 0; i < 6; i++) {
+            if (ReInput.players.GetPlayer(i).GetButtonDown("Cancel")) {
+                print("PIMML " + i);
+            }
+        }
 
-        if (leftStickHorizontal < -0.5f) print("stick left");
-        if (leftStickHorizontal > 0.5f) print("stick right");
-        if (leftStickVertical < -0.5f) print("stick down");
-        if (leftStickVertical > 0.5f) print("stick up");
+        // if (cancelBTN) print("cancel");
+        // if (optionBTN) print("option");
+        
+        // if (dpadLeft) print("left");
+        // if (dpadRight) print("right");
+        // if (dpadUp) print("up");
+        // if (dpadDown) print("down");
+
+        // if (leftStickHorizontal < -0.5f) print("stick left");
+        // if (leftStickHorizontal > 0.5f) print("stick right");
+        // if (leftStickVertical < -0.5f) print("stick down");
+        // if (leftStickVertical > 0.5f) print("stick up");
     }
 
 }

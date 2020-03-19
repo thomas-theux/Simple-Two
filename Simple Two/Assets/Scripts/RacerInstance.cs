@@ -10,6 +10,8 @@ public class RacerInstance : MonoBehaviour {
     public Transform DistanceToFinish;
     public GameObject LeaderGO;
 
+    public GameObject HailMaryGO;
+
     // public GameObject StatsGO;
     public GameObject WinsGO;
     public TMP_Text WinsText;
@@ -33,9 +35,9 @@ public class RacerInstance : MonoBehaviour {
 
     private float speedShortest = 0.1f;
     private float speedShort = 0.2f;
-    private float speedMedium = 0.5f;
-    private float speedLong = 1.0f;
-    private float speedLongest = 3.0f;
+    private float speedMedium = 0.4f;
+    private float speedLong = 0.7f;
+    private float speedLongest = 1.0f;
 
     // Walking modes
     // 25 percent chance
@@ -125,14 +127,10 @@ public class RacerInstance : MonoBehaviour {
         if (rndMode >= stumbleMin && rndMode <= stumbleMax) rndSpeedIndex = 0;
         else if (rndMode >= normalMin && rndMode <= normalMax) rndSpeedIndex = 1;
         else if (rndMode >= dashMin && rndMode <= dashMax) rndSpeedIndex = 2;
-        else if (rndMode >= hailMaryMin && rndMode <= hailMaryMax) {
-            rndSpeedIndex = 3;
-            AudioManager.instance.Play("Hail Mary");
-        }
+        else if (rndMode >= hailMaryMin && rndMode <= hailMaryMax) rndSpeedIndex = 3;
 
-        speedMultiplier = walkingSpeeds[rndSpeedIndex];
-
-        StartCoroutine(ChangeSpeed());
+        RandomLength();
+        // StartCoroutine(ChangeSpeed());
     }
 
 
@@ -161,19 +159,37 @@ public class RacerInstance : MonoBehaviour {
             // HAIL MARY
             case 3:
                 speedLength = Random.Range(speedLong, speedLongest);
+                SetHailMary();
                 break;
         }
 
         if (isRunning) {
-            RandomSpeed();
+            StartCoroutine(ChangeSpeed());
+            // RandomSpeed();
         }
     }
 
 
+    private void SetHailMary() {
+        AudioManager.instance.Play("Hail Mary");
+
+        GameObject newHailMary = Instantiate(HailMaryGO, this.gameObject.transform);
+        ParticleSystem ps = newHailMary.GetComponent<ParticleSystem>();
+        
+        ps.Stop();
+        var main = ps.main;
+        main.duration = speedLength;
+        ps.Play();
+    }
+
+
     private IEnumerator ChangeSpeed() {
+        speedMultiplier = walkingSpeeds[rndSpeedIndex];
+
         yield return new WaitForSeconds(speedLength);
 
-        RandomLength();
+        // RandomLength();
+        RandomSpeed();
     }
 
 
