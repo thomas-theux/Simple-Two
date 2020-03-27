@@ -66,11 +66,6 @@ public class PlayerInstance : MonoBehaviour {
                 }
             }
         }
-
-
-        if (optionBTN) {
-            if (PlayerID == 0) QuitToMainMenu();
-        }
     }
 
 
@@ -167,17 +162,6 @@ public class PlayerInstance : MonoBehaviour {
         GameSettings.NavigationMode = 0;
 
         SceneManager.LoadScene("2 Meadows");
-    }
-
-
-    private void QuitToMainMenu() {
-        SelectionManager.CleanUpSelectionManager();
-        SpawnRacers.CleanUpSpawnRacers();
-        SpawnPlayers.CleanUpSpawnPlayers();
-        ResultsManager.CleanUpResultsManager();
-        ResultsManager.initializedScores = false;
-
-        SceneManager.LoadScene("1 Main Menu");
     }
 
 }

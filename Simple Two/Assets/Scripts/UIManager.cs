@@ -6,12 +6,16 @@ using Rewired;
 
 public class UIManager : MonoBehaviour {
 
+    public Canvas ShowControls;
+    private bool showingControls = false;
+
     private Player playerOne;
 
     // REWIRED
     private bool confirmBTN = false;
     private bool cancelBTN = false;
     private bool optionBTN = false;
+    private bool controlsBTN = false;
 
     private bool dpadLeft = false;
     private bool dpadRight = false;
@@ -37,6 +41,7 @@ public class UIManager : MonoBehaviour {
         confirmBTN = playerOne.GetButtonDown("Confirm");
         cancelBTN = playerOne.GetButtonDown("Cancel");
         optionBTN = playerOne.GetButtonDown("Option");
+        controlsBTN = playerOne.GetButtonDown("Controls");
         
         dpadLeft = playerOne.GetButtonDown("D-Pad Left");
         dpadRight = playerOne.GetButtonDown("D-Pad Right");
@@ -49,10 +54,25 @@ public class UIManager : MonoBehaviour {
 
 
     private void ProcessInput() {
-        if (confirmBTN) {
-            GameSettings.NavigationMode = 0;
-            GameSettings.PlayerCount = GameSettings.ConnectedGamepads;
-            SceneManager.LoadScene("2 Meadows");
+        if (!showingControls) {
+            if (confirmBTN) {
+                AudioManager.instance.Play("Confirm");
+
+                GameSettings.NavigationMode = 0;
+
+                if (GameSettings.PlayerCount < 1) GameSettings.PlayerCount = GameSettings.ManualPlayerCount;
+                else GameSettings.PlayerCount = GameSettings.ConnectedGamepads;
+
+                SceneManager.LoadScene("2 Meadows");
+            }
+        }
+
+        // Show controls
+        if (controlsBTN) {
+            AudioManager.instance.Play("Show Controls");
+
+            showingControls = !showingControls;
+            ShowControls.enabled = showingControls;
         }
 
         for (int i = 0; i < 6; i++) {
