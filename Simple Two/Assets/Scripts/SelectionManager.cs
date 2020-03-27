@@ -84,12 +84,6 @@ public class SelectionManager : MonoBehaviour {
     }
 
 
-    public static void CleanUpSelectionManager() {
-        SelectedRacers.Clear();
-        DoneSelecting = 0;
-    }
-
-
     private IEnumerator CountDownTick() {
         float modifiedTime = 1 / timeLapse;
 
@@ -97,6 +91,12 @@ public class SelectionManager : MonoBehaviour {
             AudioManager.instance.Play("Count Down");
             yield return new WaitForSeconds(modifiedTime);
         }
+    }
+
+
+    public static void CleanUpSelectionManager() {
+        SelectedRacers.Clear();
+        DoneSelecting = 0;
     }
 
 }
