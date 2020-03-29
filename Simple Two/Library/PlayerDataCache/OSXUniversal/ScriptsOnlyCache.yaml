@@ -4,9 +4,11 @@ ScriptsOnlyBuild:
     - AudioManager
     - DontDestroyOnLoad
     - FinishTrigger
+    - GameManager
     - GameSettings
     - GamepadManager
     - InitializeGame
+    - PlayerCountManager
     - PlayerInstance
     - RacerInstance
     - ResultsManager
@@ -30,6 +32,7 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TMP_SubMeshUI
     - TMPro.TextMeshProUGUI
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
@@ -90,15 +93,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12126}
     - Class: 114
-      Script: {instanceID: 12506}
+      Script: {instanceID: 12508}
     - Class: 114
-      Script: {instanceID: 12520}
+      Script: {instanceID: 12522}
     - Class: 114
-      Script: {instanceID: 12766}
+      Script: {instanceID: 12768}
     - Class: 114
-      Script: {instanceID: 12920}
+      Script: {instanceID: 12922}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 12932}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -131,14 +134,26 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11400}
     - Class: 114
+      Script: {instanceID: 11712}
+    - Class: 114
       Script: {instanceID: 11904}
     - Class: 114
-      Script: {instanceID: 12776}
+      Script: {instanceID: 12272}
+    - Class: 114
+      Script: {instanceID: 12508}
+    - Class: 114
+      Script: {instanceID: 12714}
+    - Class: 114
+      Script: {instanceID: 12778}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -190,15 +205,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12236}
     - Class: 114
-      Script: {instanceID: 12506}
+      Script: {instanceID: 12508}
     - Class: 114
-      Script: {instanceID: 12650}
+      Script: {instanceID: 12652}
     - Class: 114
-      Script: {instanceID: 12712}
+      Script: {instanceID: 12714}
     - Class: 114
-      Script: {instanceID: 12776}
+      Script: {instanceID: 12778}
     - Class: 114
-      Script: {instanceID: 12812}
+      Script: {instanceID: 12814}
+    - Class: 114
+      Script: {instanceID: 13160}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -614,7 +631,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 2117a7440d7aec441b2ad92bffca8f35
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UIManager
@@ -702,6 +719,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 5c4a7362eda2c401b23a980d8e290bba
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerCountManager
   - hash:
       serializedVersion: 2
       Hash: 5f1752ed2092162f016c19510c28a8b9
@@ -890,6 +913,12 @@ ScriptsOnlyBuild:
     className: TestRunCallbackListener
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
+  - hash:
+      serializedVersion: 2
       Hash: 4ef0f7d42cdb13479386e1f049c315aa
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner
@@ -941,4 +970,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/0 Initializer.unity
   - Assets/Scenes/1 Main Menu.unity
   - Assets/Scenes/2 Meadows.unity
-  playerPath: /Users/thomas_ge/Games/Simple Two/Simple Two v0.1.0.app
+  playerPath: /Users/thomas_ge/Games/Simple Two/Simple Two v0.2.5.app

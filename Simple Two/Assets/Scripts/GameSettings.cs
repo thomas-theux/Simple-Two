@@ -23,7 +23,8 @@ public class GameSettings : MonoBehaviour {
 
     private void Awake() {
         for (int i = 0; i < PlayerMax; i++) {
-            Sprite newSprite = Resources.Load<Sprite>("Sprites/" + "Racer-" + i);
+            // Sprite newSprite = Resources.Load<Sprite>("Sprites/" + "Racer-" + i);
+            Sprite newSprite = Resources.Load<Sprite>("Sprites2/" + "Racer-" + i);
             RacerSprites.Add(newSprite);
         }
     }
