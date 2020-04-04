@@ -18,13 +18,61 @@ public class GameSettings : MonoBehaviour {
     // Are players able to select their racer after a round?
     public static bool SelectAnew = true;
 
+    // 0 = default; 1 = homies; 2 = ar crowd; 3 = alte wg
+    public static int RacerSpritesResource = 3;
+
+    public static List<List<string>> RacerNames = new List<List<string>>();
+
+    private List<string> RacerNamesDefault = new List<string>(){
+        "Mr. Skelett",
+        "Blobby",
+        "Green Douchebag",
+        "Horns Jr.",
+        "Prince Weirdo III",
+        "Dr. Pylonus"
+    };
+
+    private List<string> RacerNamesHomies = new List<string>(){
+        "Adipöser Schwede",
+        "Speckiger Alex",
+        "Dicker Schreiner",
+        "Üppiger Manu",
+        "Fettkopf Benny",
+        "Dicknase Thomas"
+    };
+
+    private List<string> RacerNamesARCrowd = new List<string>(){
+        "Jani Boy",
+        "Eddienator",
+        "Lindor",
+        "Ronaldo",
+        "Thömmes",
+        "Oderfla"
+    };
+
+    private List<string> RacerNamesAlteWG = new List<string>(){
+        "Clautschilii",
+        "Jensi Boy",
+        "Tschacklin",
+        "Tommi",
+        "Mehmet",
+        "Adi"
+    };
+
     public static List<Sprite> RacerSprites = new List<Sprite>();
 
 
     private void Awake() {
+        RacerNames.Add(RacerNamesDefault);
+        RacerNames.Add(RacerNamesHomies);
+        RacerNames.Add(RacerNamesARCrowd);
+        RacerNames.Add(RacerNamesAlteWG);
+
+        string spriteResource = "Sprites" + RacerSpritesResource + "/";
+
         for (int i = 0; i < PlayerMax; i++) {
             // Sprite newSprite = Resources.Load<Sprite>("Sprites/" + "Racer-" + i);
-            Sprite newSprite = Resources.Load<Sprite>("Sprites2/" + "Racer-" + i);
+            Sprite newSprite = Resources.Load<Sprite>(spriteResource + "Racer-" + i);
             RacerSprites.Add(newSprite);
         }
     }

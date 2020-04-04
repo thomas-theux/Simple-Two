@@ -709,7 +709,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: 109bd57b118432853520c196b8bd3f91
+      Hash: 103d58c22f75267e7c79e47f8b59356d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RacerInstance
@@ -970,4 +970,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/0 Initializer.unity
   - Assets/Scenes/1 Main Menu.unity
   - Assets/Scenes/2 Meadows.unity
-  playerPath: /Users/thomas_ge/Desktop/simple-friends
+  playerPath: /Users/thomasgr/Desktop/simple-wg

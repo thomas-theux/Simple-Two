@@ -16,6 +16,9 @@ public class RacerInstance : MonoBehaviour {
     public GameObject WinsGO;
     public TMP_Text WinsText;
 
+    public GameObject RacerNameGO;
+    public TMP_Text RacerText;
+
     public float CurrentDistanceToFinish;
 
     private float speedLength = 1.0f;
@@ -58,12 +61,9 @@ public class RacerInstance : MonoBehaviour {
 
 
     private void Start() {
-        // StatsGO.transform.parent = null;
-        // StatsGO.name = "Stats " + RacerID;
-        // StatsGO.transform.parent = GameObject.Find("Stats").transform;
-
         WinsGO.name = "Wins " + RacerID;
-        // WinsGO.transform.parent = GameObject.Find("Wins").transform;
+        
+        RacerText.text = GameSettings.RacerNames[GameSettings.RacerSpritesResource][RacerID] + "";
 
         SwitchStats(true);
     }
@@ -112,6 +112,11 @@ public class RacerInstance : MonoBehaviour {
 
         // StatsGO.SetActive(switchState);
         WinsGO.SetActive(switchState);
+    }
+
+    
+    public void SwitchRacerName(bool switchState) {
+        RacerNameGO.SetActive(switchState);
     }
 
 

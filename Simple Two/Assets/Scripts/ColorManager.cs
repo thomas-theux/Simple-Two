@@ -13,4 +13,6 @@ public class ColorManager : MonoBehaviour {
         new Color32(230, 69, 230, 255)    // PINK
     };
 
+    public static Color32 KeyWhite = new Color32(255, 255, 255, 255);
+
 }

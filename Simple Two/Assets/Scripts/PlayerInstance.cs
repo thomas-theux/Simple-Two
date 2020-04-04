@@ -113,6 +113,8 @@ public class PlayerInstance : MonoBehaviour {
                 navigationIndex = 1;
                 SelectionManager.SelectedRacers[PlayerID] = SelectedRacerIndex;
 
+                SpawnRacers.AllRacersArr[SelectedRacerIndex].GetComponent<RacerInstance>().RacerText.color = ColorManager.PlayerColors[PlayerID];
+
                 SelectionManager.DoneSelecting++;
                 StartCoroutine(SelectionManager.ContinueDelay());
             } else {
@@ -146,6 +148,8 @@ public class PlayerInstance : MonoBehaviour {
 
             navigationIndex = 0;
             SelectionManager.SelectedRacers[PlayerID] = -1;
+
+            SpawnRacers.AllRacersArr[SelectedRacerIndex].GetComponent<RacerInstance>().RacerText.color = ColorManager.KeyWhite;
 
             SelectionManager.DoneSelecting--;
         }

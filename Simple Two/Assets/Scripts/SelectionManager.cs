@@ -43,6 +43,7 @@ public class SelectionManager : MonoBehaviour {
 
         for (int i = 0; i < GameSettings.PlayerMax; i++) {
             SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().SwitchStats(false);
+            SpawnRacers.AllRacersArr[i].GetComponent<RacerInstance>().SwitchRacerName(false);
         }
     }
 
