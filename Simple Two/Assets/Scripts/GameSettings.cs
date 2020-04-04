@@ -19,7 +19,7 @@ public class GameSettings : MonoBehaviour {
     public static bool SelectAnew = true;
 
     // 0 = default; 1 = homies; 2 = ar crowd; 3 = alte wg
-    public static int RacerSpritesResource = 3;
+    public static int RacerSpritesResource = 0;
 
     public static List<List<string>> RacerNames = new List<List<string>>();
 
